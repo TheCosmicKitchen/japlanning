@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Japan 2027 Routes</title>
+<meta name="description" content="Two 21-day rail routes across southern Japan, October 2027, side by side: Shuzenji vs Yufuin.">
+<meta name="theme-color" content="#f6f1e7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-img a"><img src="img/cover-shuzenji.jpg" alt="" fetchpriority="high"></div>
+  <div class="hero-img b"><img src="img/cover-yufuin.jpg" alt=""></div>
+  <div class="hero-text">
+    <p class="kicker">Japan · October 2027 · 21 days by rail</p>
+    <h1>Southern Japan by Rail</h1>
+    <p class="sub">Two routes, one trip. Same Fukuoka-to-Tokyo spine; the difference is where we soak.</p>
+    <div class="hero-pick">
+      <a href="#compare" class="pill A">A · Shuzenji route</a>
+      <span class="vs">vs</span>
+      <a href="#compare" class="pill B">B · Yufuin route</a>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav" id="topnav">
+  <a href="#compare">Compare</a>
+  <a href="#map">Map</a>
+  <a href="#calendar">Calendar</a>
+  <a href="#days">Day by day</a>
+  <a href="#cities">Food &amp; history</a>
+  <a href="#onsen">Onsen</a>
+  <a href="#logistics">Logistics</a>
+  <a href="#vote">Vote</a>
+</nav>
+
+<main>
+  <!-- Controls shared by the whole page -->
+  <div class="controls" id="controls">
+    <label class="start">
+      <span>Day 1 (arrive Fukuoka)</span>
+      <input type="date" id="startDate" min="2027-09-01" max="2027-11-30">
+    </label>
+    <div class="seg" id="routeSeg" role="group" aria-label="Show routes">
+      <button data-show="both" class="on">Both</button>
+      <button data-show="A">A · Shuzenji</button>
+      <button data-show="B">B · Yufuin</button>
+    </div>
+  </div>
+
+  <section id="compare" class="section">
+    <h2>At a glance</h2>
+    <p class="lede">Both routes fly Seattle → Fukuoka, ride east, and fly home from Tokyo. Bars show where you sleep each night.</p>
+    <div id="strips" class="strips"></div>
+    <div class="table-wrap"><table class="compare" id="compareTable"></table></div>
+  </section>
+
+  <section id="map" class="section">
+    <h2>The loops</h2>
+    <p class="lede">Each route is a full loop: <b>✈ fly in</b> to Fukuoka, <b>🚄 rail east</b>, <b>✈ fly home</b> from Haneda. Tap any stop for details; press play to walk the trip day by day.</p>
+    <div class="map-bar">
+      <div class="seg" id="mapView">
+        <button data-view="japan" class="on">Japan</button>
+        <button data-view="loop">Whole loop</button>
+      </div>
+      <div class="player">
+        <button id="playBtn" class="play" aria-label="Play the trip">▶ Play trip</button>
+        <input type="range" id="dayRange" min="0" max="21" value="0" aria-label="Trip day">
+        <span id="dayLabel" class="daylabel">Day 0</span>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div id="leaflet" class="leaflet-host"></div>
+      <div class="legend">
+        <span><i class="lg base"></i>Overnight base</span>
+        <span><i class="lg rail"></i>Train stop / transfer</span>
+        <span><i class="lg trip"></i>Day trip</span>
+        <span><i class="lg air">✈</i>Airport</span>
+        <span><i class="ln A"></i>Route A</span>
+        <span><i class="ln B"></i>Route B</span>
+        <span><i class="ln fly"></i>Flight</span>
+      </div>
+    </div>
+    <div id="mapDay" class="mapday"></div>
+  </section>
+
+  <section id="calendar" class="section">
+    <h2>Calendars</h2>
+    <p class="lede">Colour = where you sleep that night. ⚠ marks closure days or holidays for the plan. Tap a day to jump to it.</p>
+    <div class="cal-legend" id="calLegend"></div>
+    <div class="cals" id="cals"></div>
+  </section>
+
+  <section id="days" class="section">
+    <div class="days-head">
+      <h2>Day by day</h2>
+      <label class="toggle"><input type="checkbox" id="diffOnly"> Only days that differ</label>
+    </div>
+    <div id="dayList" class="daylist"></div>
+  </section>
+
+  <section id="cities" class="section">
+    <h2>Food &amp; history, city by city</h2>
+    <p class="lede">What to eat and what you're looking at. Badges show which route visits.</p>
+    <div class="city-tabs" id="cityTabs" role="tablist"></div>
+    <div id="cityPanel" class="city-panel"></div>
+  </section>
+
+  <section id="onsen" class="section">
+    <h2>The onsen face-off</h2>
+    <p class="lede">The real choice: two restful nights with a private in-room hot spring, one full day with no packing or trains.</p>
+    <div class="pair" id="onsenPair"></div>
+  </section>
+
+  <section id="logistics" class="section">
+    <h2>Getting around</h2>
+    <div class="pair" id="transferPair"></div>
+    <div class="flights">
+      <img src="img/air.jpg" alt="" loading="lazy" decoding="async">
+      <div>
+        <h3>Flights (both routes)</h3>
+        <p><b>Out · Day 0 → 1:</b> SEA → HND or ICN → FUK on one protected itinerary. Arrival day in Fukuoka: no major sightseeing.</p>
+        <p><b>Home · Day 21:</b> Ikebukuro → Haneda with a generous buffer, nonstop HND → SEA, usually arriving the same calendar day.</p>
+      </div>
+    </div>
+    <h3>Book in this order</h3>
+    <ol class="booking" id="booking"></ol>
+    <h3>Hotel bases</h3>
+    <p class="lede">Location first; specific properties later. Fukuoka: Hakata Stn · Hiroshima: Station or Hondori · Okayama: Station · Nagoya: Station · Tokyo: Ikebukuro / Sunshine City.</p>
+  </section>
+
+  <section id="vote" class="section">
+    <h2>Call vote</h2>
+    <p class="lede">For the call: add each person's pick. Saved in this browser only; copy the result to share.</p>
+    <form id="voteForm" class="vote-form" autocomplete="off">
+      <input id="voterName" placeholder="Name" maxlength="30" required>
+      <button type="submit" data-pick="A" class="vbtn A">Vote A · Shuzenji</button>
+      <button type="submit" data-pick="B" class="vbtn B">Vote B · Yufuin</button>
+    </form>
+    <div class="tally" id="tally"></div>
+    <div class="vote-actions">
+      <button id="copyVotes" class="ghost">Copy result</button>
+      <button id="clearVotes" class="ghost">Clear votes</button>
+    </div>
+  </section>
+
+  <section id="decks" class="section">
+    <h2>Original decks</h2>
+    <div class="pair" id="deckPair"></div>
+    <h3>Sources &amp; caveats</h3>
+    <ul class="sources" id="sources"></ul>
+    <p class="fine">Timings are planning estimates subject to 2027 timetables. Images are illustrative artwork from the decks, not photos of booked places. City food &amp; history notes are general background; check opening days before going.</p>
+  </section>
+</main>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="data.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
