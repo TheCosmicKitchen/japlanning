@@ -42,6 +42,7 @@ button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulat
 .pill { color: #fff; text-decoration: none; padding: 9px 16px; border-radius: 999px; font-weight: 600; font-size: .92rem; }
 .pill.A { background: var(--A); } .pill.B { background: var(--B); }
 .vs { font-family: "Shippori Mincho", serif; font-weight: 800; }
+.guide-link { display: inline-block; margin-top: 14px; color: #fff; font-weight: 600; font-size: .9rem; text-decoration: none; background: rgba(0,0,0,.35); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); padding: 7px 14px; border-radius: 999px; }
 
 /* ---------- nav + controls */
 .topnav {
@@ -52,6 +53,7 @@ button { font: inherit; color: inherit; cursor: pointer; touch-action: manipulat
 .topnav::-webkit-scrollbar { display: none; }
 .topnav a { white-space: nowrap; text-decoration: none; color: var(--ink); font-weight: 500; font-size: .9rem; padding: 6px 10px; border-radius: 8px; }
 .topnav a.active { background: var(--ink); color: var(--paper); }
+.topnav a.navguide { color: var(--B); font-weight: 700; }
 main { max-width: 1180px; margin: 0 auto; padding: 0 var(--gutter) 60px; }
 .controls {
   position: sticky; top: 49px; z-index: 999; display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: space-between;

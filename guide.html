@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Japan Survival Guide</title>
+<meta name="description" content="Read Japan's signs and menus: katakana in an afternoon, 20 must-know kanji, and the tools to cover the rest.">
+<meta name="theme-color" content="#f6f1e7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="guide.css">
+</head>
+<body>
+
+<header class="hero ghero">
+  <div class="hero-img"><img src="img/arcade.jpg" alt="" fetchpriority="high"></div>
+  <div class="watermark" aria-hidden="true">カタカナ</div>
+  <a class="back" href="./">← Trip planner</a>
+  <div class="hero-text">
+    <p class="kicker">Japan 2027 · Survival guide · サバイバル</p>
+    <h1>Read Japan in an afternoon</h1>
+    <p class="sub">You don't need to speak Japanese. Learn <b>katakana</b> and you can sound out menus, shop signs and half the words on a train platform. Add <b>20 kanji</b> and you can find the exit, the right bath and the right platform.</p>
+    <div class="hero-pick">
+      <a href="#katakana" class="pill A">Start with katakana</a>
+      <a href="#kanji" class="pill B">20 must-know kanji</a>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav" id="topnav">
+  <a href="#katakana">Katakana</a>
+  <a href="#words">Read real words</a>
+  <a href="#phrases">Phrases</a>
+  <a href="#kanji">20 kanji</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#tools">Tools &amp; links</a>
+</nav>
+
+<main>
+  <section id="katakana" class="section">
+    <p class="eyebrow A">Step 1 · 一</p>
+    <h2>Katakana <span class="jp-inline">カタカナ</span></h2>
+    <p class="lede">Japanese uses katakana for words borrowed from other languages, and a lot of those come from English. <b>コーヒー</b> is "kō-hī", coffee. Once you can sound it out, you can often guess the word. There are 46 basic characters. Tap one to hear it.</p>
+
+    <div class="tips">
+      <div class="tip"><b>ー stretches the vowel</b><span>ビール = bī-ru (beer), not biru (building)</span></div>
+      <div class="tip"><b>Small ッ doubles the next sound</b><span>チケット = chi-ket-to (ticket)</span></div>
+      <div class="tip"><b>Small ャ ュ ョ combine</b><span>メニュー = me-nyū (menu)</span></div>
+      <div class="tip"><b>゛ and ゜ change the sound</b><span>カ ka → ガ ga · ハ ha → バ ba → パ pa</span></div>
+    </div>
+
+    <div class="kana-tabs seg" id="kanaTabs" role="tablist">
+      <button class="on" data-set="basic">Basic 46</button>
+      <button data-set="dakuten">゛ ゜ sounds</button>
+      <button data-set="combo">Combos</button>
+    </div>
+    <div class="kana-grid" id="kanaGrid"></div>
+
+    <div class="lookalikes">
+      <h3>Watch out for look-alikes</h3>
+      <div class="la-row">
+        <div class="la"><span class="big">シ</span><b>shi</b><small>strokes go up from the left, like a smile</small></div>
+        <div class="la"><span class="big">ツ</span><b>tsu</b><small>strokes come down from the top</small></div>
+        <div class="la"><span class="big">ソ</span><b>so</b><small>long stroke drops from the top</small></div>
+        <div class="la"><span class="big">ン</span><b>n</b><small>long stroke rises from the bottom</small></div>
+      </div>
+      <p class="fine">Also mixed up a lot: ク ku vs ケ ke vs タ ta, and ウ u vs ワ wa vs フ fu.</p>
+    </div>
+  </section>
+
+  <section id="words" class="section">
+    <p class="eyebrow B">Step 2 · 二</p>
+    <h2>Read real words <span class="jp-inline">ことば</span></h2>
+    <p class="lede">Words you'll see on this trip. Try to sound each one out, then tap to check.</p>
+    <div class="words" id="wordGrid"></div>
+  </section>
+
+  <section id="phrases" class="section">
+    <p class="eyebrow A">Step 3 · 三</p>
+    <h2>Say it <span class="jp-inline">ひとこと</span></h2>
+    <p class="lede">Ready-made phrases. Read the bold phonetics out loud, or tap 🔊 to hear them. Say every syllable evenly, with no heavy stress, and let a final "u" fade out: <b>desu</b> sounds like "dess".</p>
+
+    <div class="builders">
+      <div class="builder" data-builder="please">
+        <div class="b-head"><b>Ordering</b> · "<i>___</i>, please"</div>
+        <div class="chips" role="group" aria-label="Pick an item"></div>
+        <div class="b-out"><button class="speak" aria-label="Hear it">🔊</button><div><div class="b-jp"></div><div class="b-say"></div><div class="b-en"></div></div></div>
+      </div>
+      <div class="builder" data-builder="where">
+        <div class="b-head"><b>Finding things</b> · "Where is <i>___</i>?"</div>
+        <div class="chips" role="group" aria-label="Pick a place"></div>
+        <div class="b-out"><button class="speak" aria-label="Hear it">🔊</button><div><div class="b-jp"></div><div class="b-say"></div><div class="b-en"></div></div></div>
+      </div>
+    </div>
+
+    <div class="phrase-groups" id="phraseList"></div>
+  </section>
+
+  <section id="kanji" class="section">
+    <p class="eyebrow B">Step 4 · 四</p>
+    <h2>20 must-know kanji <span class="jp-inline">漢字</span></h2>
+    <p class="lede">You'll see these every day: exits, platforms, baths, prices, opening hours. Each card shows the word you'll actually see on signs, and 📷 photos show real signs in Japan. Tap a photo to zoom in.</p>
+    <div class="kanji-filter seg" id="kanjiFilter">
+      <button class="on" data-g="all">All</button>
+      <button data-g="move">Getting around</button>
+      <button data-g="bath">Toilets &amp; baths</button>
+      <button data-g="shop">Shops &amp; signs</button>
+    </div>
+    <div class="kanji-grid" id="kanjiGrid"></div>
+    <p class="fine">Onsen tip: the men's bath often has a blue curtain and the women's a red one, but some inns swap the curtains each day so both groups get to use each bath. Read the kanji: <b>男</b> men, <b>女</b> women.</p>
+  </section>
+
+  <section id="quiz" class="section">
+    <p class="eyebrow A">Step 5 · 五</p>
+    <h2>Quiz yourself <span class="jp-inline">クイズ</span></h2>
+    <div class="quiz-modes seg" id="quizModes">
+      <button class="on" data-mode="kana">Katakana</button>
+      <button data-mode="words">Words</button>
+      <button data-mode="phrases">Phrases</button>
+      <button data-mode="kanji">Kanji</button>
+    </div>
+    <div class="quiz" id="quizBox">
+      <div class="q-top"><span id="qScore">0 / 0</span><span id="qStreak">🔥 0</span></div>
+      <div class="q-prompt" id="qPrompt"></div>
+      <div class="q-hint" id="qHint"></div>
+      <div class="q-choices" id="qChoices"></div>
+      <div class="q-foot">
+        <span id="qFeedback" class="q-feedback" aria-live="polite"></span>
+        <button id="qNext" class="play" hidden>Next →</button>
+      </div>
+    </div>
+    <p class="fine">Answers you miss come back more often.</p>
+  </section>
+
+  <section id="tools" class="section">
+    <p class="eyebrow B">Backup · 道具</p>
+    <h2>Tools &amp; links</h2>
+    <div class="tool-grid">
+      <a class="tool" href="https://translate.google.com/?sl=ja&tl=en" target="_blank" rel="noopener">
+        <span class="ti">📷</span>
+        <b>Google Translate</b>
+        <span>Point your camera at a menu or sign and the English appears on top. Works for anything you can't read.</span>
+      </a>
+      <a class="tool" href="https://apps.apple.com/app/google-translate/id414706506" target="_blank" rel="noopener">
+        <span class="ti">📱</span>
+        <b>Translate for iPhone</b>
+        <span>App Store</span>
+      </a>
+      <a class="tool" href="https://play.google.com/store/apps/details?id=com.google.android.apps.translate" target="_blank" rel="noopener">
+        <span class="ti">🤖</span>
+        <b>Translate for Android</b>
+        <span>Google Play</span>
+      </a>
+      <a class="tool" href="https://www.tofugu.com/japanese/learn-katakana/" target="_blank" rel="noopener">
+        <span class="ti">🦊</span>
+        <b>Tofugu: Learn Katakana</b>
+        <span>The best free katakana guide. A picture to remember every character, plus practice.</span>
+      </a>
+      <a class="tool" href="https://www.tofugu.com/japanese/learn-hiragana/" target="_blank" rel="noopener">
+        <span class="ti">🌸</span>
+        <b>Tofugu: Learn Hiragana</b>
+        <span>Extra credit: the other alphabet, used in grammar and lots of food names.</span>
+      </a>
+    </div>
+    <div class="callout">
+      <b>Before you fly:</b> in the Translate app, download <b>Japanese</b> for offline use. Camera translation then works on the train and underground, even with no signal.
+    </div>
+  </section>
+</main>
+
+<dialog id="lightbox" class="lightbox" aria-label="Photo">
+  <div class="lb-inner">
+    <button class="lb-close" aria-label="Close">✕</button>
+    <span class="lb-k"></span>
+    <img class="lb-img" alt="">
+    <p class="lb-cap"></p>
+  </div>
+</dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<script src="guide.js" defer></script>
+</body>
+</html>
